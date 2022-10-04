@@ -40,4 +40,24 @@ public class StudentServiceImpl implements StudentService{
         }
 
     }
+
+
+    @Override
+    public Students updateStudent(Students stud, int id) {
+        Students existingStudent = studentRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("student", "id",id));
+//       Optional<Students> existingStudent = studentRepository.findById(id);
+//        if(existingStudent.isPresent()){
+//            return existingStudent.get();
+//        }else{
+//            throw new ResourceNotFoundException("student", "id",id);
+//        }
+
+        existingStudent.setFrst_name(stud.getFrst_name());
+        existingStudent.setLast_name(stud.getLast_name());
+        existingStudent.setEmail(stud.getEmail());
+        studentRepository.save(existingStudent);
+        return existingStudent;
+
+    }
 }

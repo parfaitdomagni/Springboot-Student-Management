@@ -32,8 +32,14 @@ public class StudentsModel {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Students> getStudentById(@PathVariable("id") int std_id){
-        return new ResponseEntity<Students>(studentServiceImpl.getStudentById(std_id), HttpStatus.OK);
+    public ResponseEntity<Students> getStudentById(@PathVariable("{id}") int std_id){
+        return new ResponseEntity<Students>(studentServiceImpl.getStudentById(std_id), HttpStatus.OK    );
+    }
+    @PutMapping( "{id_id}")
+    public ResponseEntity<Students> updateStudentInfo(@PathVariable("{id_id}") int id,
+                                                      @RequestBody Students studentInfo){
+
+        return new ResponseEntity<Students>(studentServiceImpl.updateStudent(studentInfo, id), HttpStatus.OK);
     }
 
 
