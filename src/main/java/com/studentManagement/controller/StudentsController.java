@@ -7,17 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/api/students")
 @RestController
-public class StudentsModel {
+public class StudentsController {
 
     @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    public StudentsModel(StudentServiceImpl studentServiceImpl) {
+    public StudentsController(StudentServiceImpl studentServiceImpl) {
         this.studentServiceImpl = studentServiceImpl;
     }
 
@@ -36,7 +35,7 @@ public class StudentsModel {
         return new ResponseEntity<Students>(studentServiceImpl.getStudentById(std_id), HttpStatus.OK    );
     }
     @PutMapping( "{id_id}")
-    public ResponseEntity<Students> updateStudentInfo(@PathVariable("{id_id}") int id,
+    public ResponseEntity<Students> updateStudentInfo(@PathVariable("id_id") int id,
                                                       @RequestBody Students studentInfo){
 
         return new ResponseEntity<Students>(studentServiceImpl.updateStudent(studentInfo, id), HttpStatus.OK);
